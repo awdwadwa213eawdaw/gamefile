@@ -2990,8 +2990,12 @@ function Battle:getTarget(decision)
 	--	print('retargeting ' .. decision.pokemon .. '\'s move (attempted to target ' .. decision.targetLoc .. ')')
 	if not decision.targetPosition or not decision.targetSide then
 		target = self:resolveTarget(decision.pokemon, decision.move)
-		decision.targetSide = target.side
-		decision.targetPosition = target.position
+		if target and target ~= null then
+			decision.targetSide = target.side
+			decision.targetPosition = target.position
+		else
+			return false
+		end
 	end
 	return decision.targetSide.active[decision.targetPosition]
 end
@@ -3124,16 +3128,18 @@ function Battle:resolvePriority(decision)
 			decision.pokemon.switchFlag = false
 			if not decision.speed and decision.pokemon and decision.pokemon.isActive then decision.speed = decision.pokemon.speed end
 		end
-		if decision.move then
-			local target
+			if decision.move then
+				local target
 
-			if not decision.targetPosition then
-				target = self:resolveTarget(decision.pokemon, decision.move)
-				decision.targetSide = target.side
-				decision.targetPosition = target.position
-			end
+				if not decision.targetPosition then
+					target = self:resolveTarget(decision.pokemon, decision.move)
+					if target and target ~= null then
+						decision.targetSide = target.side
+						decision.targetPosition = target.position
+					end
+				end
 
-			decision.move = self:getMoveCopy(decision.move)
+				decision.move = self:getMoveCopy(decision.move)
 			if (decision.zmove) then
 				local zMoveName = self:getZMove(decision.move, decision.pokemon, true)
 				if (zMoveName) then
