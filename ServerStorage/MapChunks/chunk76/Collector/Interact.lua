@@ -1,0 +1,1 @@
+return 'They say that each and every Spinda is unique, but it seems like Spinda in Roria look exactly the same...'
