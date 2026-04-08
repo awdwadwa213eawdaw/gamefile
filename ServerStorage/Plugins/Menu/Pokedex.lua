@@ -754,6 +754,19 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 				Parent = routesListContainer.gui
 			})
 
+			local function refreshRouteButtonSizing()
+				if not routesScrollFrame then return end
+				for _, child in ipairs(routesScrollFrame:GetChildren()) do
+					if child:IsA("ImageButton") or child:IsA("TextButton") then
+						child.Size = isCompactRoutesLayout and UDim2.fromScale(0.96, 0.11) or UDim2.fromScale(0.9, 0.08)
+						local label = child:FindFirstChild(child.Name .. "_Label")
+						if label and label:IsA("TextLabel") then
+							label.TextSize = isCompactRoutesLayout and 18 or 15
+						end
+					end
+				end
+			end
+
 			local function applyRoutesLayout()
 				if not routesContainerFrame or not routesContainerFrame.Parent then return end
 				local routeWidth = routesContainerFrame.AbsoluteSize.X
@@ -779,9 +792,11 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 
 					routesScrollFrame.Position = UDim2.fromScale(0.03, 0.04)
 					routesScrollFrame.Size = UDim2.fromScale(0.94, 0.92)
+					routesScrollFrame.ScrollBarThickness = 10
 
 					routesGridContainer.Position = UDim2.fromScale(0.03, 0.04)
 					routesGridContainer.Size = UDim2.fromScale(0.94, 0.92)
+					routesGridContainer.ScrollBarThickness = 10
 				else
 					routesTitleFrame.Size = UDim2.fromScale(0.45, 0.15)
 					routesTitleFrame.Position = UDim2.fromScale(0, 0)
@@ -797,10 +812,14 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 
 					routesScrollFrame.Position = UDim2.fromScale(0.05, 0.05)
 					routesScrollFrame.Size = UDim2.fromScale(0.9, 0.9)
+					routesScrollFrame.ScrollBarThickness = 7
 
 					routesGridContainer.Position = UDim2.fromScale(0.05, 0.05)
 					routesGridContainer.Size = UDim2.fromScale(0.9, 0.9)
+					routesGridContainer.ScrollBarThickness = 7
 				end
+
+				refreshRouteButtonSizing()
 			end
 
 
