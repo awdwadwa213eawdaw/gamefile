@@ -230,7 +230,6 @@ function TwoPlayerSide:AIChooseMove(request)
 					choice = choice .. ' ' .. targetLoc
 				end
 				choices[n] = choice .. (suffix or '')
-				if self._aiEmitTestMessage then self:_aiEmitTestMessage(string.format('2v2 slot %d command = %s', n, choices[n])) end
 			else
 				choices[n] = 'move 1'
 			end
@@ -265,7 +264,6 @@ function TwoPlayerSide:AIForceSwitch(request)
 		end
 	end
 
-	if self._aiEmitTestMessage then self:_aiEmitTestMessage('2v2 force switch choices = ' .. table.concat(choices, ', ')) end
 	self.battle:choose(nil, self.id, choices, self.battle.rqid)
 end
 
@@ -292,7 +290,6 @@ function TwoPlayerSide:emitRequest(request)
 			self:AIForceSwitch(request)
 			return
 		elseif request.requestType == 'move' then
-			if self._aiEmitTestMessage then self:_aiEmitTestMessage('2v2 AI handling move request') end
 			self:AIChooseMove(request)
 			return
 		end

@@ -240,13 +240,9 @@ function BattleSide:_aiDebugEnabled()
 end
 
 function BattleSide:_aiEmitTestMessage(msg)
-	if not self:_aiDebugEnabled() then return end
-	print('[AI TEST]', self.id, msg)
-	if AI_TEST_CALLBACKS and self.emitCallback then
-		pcall(function()
-			self:emitCallback('aidebug', msg)
-		end)
-	end
+	-- AI test messaging is disabled in runtime battle logic. It has been
+	-- observed to cause ScriptTimeout cascades in 2v2 AI request handling.
+	return
 end
 
 function BattleSide:_aiDescribeTarget(target)
