@@ -243,8 +243,13 @@ function BattleSide:_aiEmitTestMessage(msg)
 	if not self:_aiDebugEnabled() then return end
 	print('[AI TEST]', self.id, msg)
 	if AI_TEST_CALLBACKS and self.emitCallback then
-		pcall(function()
-			self:emitCallback('aidebug', msg)
+		-- Avoid re-entrant callback execution on the same stack, which can
+		-- cascade into ScriptTimeout when debug callbacks trigger additional
+		-- battle-side work.
+		task.defer(function()
+			pcall(function()
+				self:emitCallback('aidebug', msg)
+			end)
 		end)
 	end
 end
