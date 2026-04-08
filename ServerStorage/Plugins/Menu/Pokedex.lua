@@ -15,13 +15,13 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 	local GRID_COLOR = color(72, 94, 150)
 	local ENTRY_THEME_COLOR = Color3.new(.7, .8, .9)
 	local ENTRY_TEXT_COLOR = GRID_COLOR
-	local ROUTES_PANEL_BG = Color3.fromRGB(214, 39, 62)
-	local ROUTES_SIDEBAR_BG = Color3.fromRGB(168, 18, 45)
-	local ROUTES_ACCENT = Color3.fromRGB(237, 52, 57)
-	local ROUTES_ACCENT_DARK = Color3.fromRGB(147, 20, 37)
-	local ROUTES_CARD_BG = Color3.fromRGB(236, 92, 112)
-	local ROUTES_TEXT_MAIN = Color3.fromRGB(255, 243, 246)
-	local ROUTES_TEXT_SUB = Color3.fromRGB(255, 217, 225)
+	local ROUTES_PANEL_BG = Color3.fromRGB(243, 248, 255)
+	local ROUTES_SIDEBAR_BG = Color3.fromRGB(222, 236, 255)
+	local ROUTES_ACCENT = Color3.fromRGB(47, 106, 196)
+	local ROUTES_ACCENT_DARK = Color3.fromRGB(28, 72, 146)
+	local ROUTES_CARD_BG = Color3.fromRGB(255, 255, 255)
+	local ROUTES_TEXT_MAIN = Color3.fromRGB(18, 38, 74)
+	local ROUTES_TEXT_SUB = Color3.fromRGB(75, 94, 127)
 
 	local background, gui, iconContainer, entryContainer, rightTray, leftTray, topTray, backButton
 	local routesContainerFrame, tabRoutesFrame, routesTitleFrame, routesScrollFrame, routesGridContainer, routesSidebar, routesListContainer, searchBox, searchHeader
@@ -702,7 +702,7 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 
 			local searchBarShell = _p.RoundedFrame:new({
 				["Name"] = "SearchBoxHolder",
-				["BackgroundColor3"] = Color3.fromRGB(252, 245, 247),
+				["BackgroundColor3"] = ROUTES_CARD_BG,
 				["Position"] = UDim2.fromScale(0.06, 0.52),
 				["Size"] = UDim2.fromScale(0.88, 0.28),
 				["ZIndex"] = 8,
@@ -716,9 +716,9 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 				ClearTextOnFocus = false,
 				Font = Enum.Font.GothamSemibold,
 				PlaceholderText = "Search Pokemon",
-				PlaceholderColor3 = Color3.fromRGB(179, 120, 133),
+				PlaceholderColor3 = Color3.fromRGB(124, 146, 184),
 				Text = "",
-				TextColor3 = Color3.fromRGB(102, 23, 41),
+				TextColor3 = ROUTES_TEXT_MAIN,
 				TextSize = 14,
 				TextScaled = false,
 				TextXAlignment = Enum.TextXAlignment.Left,
@@ -835,10 +835,10 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 							self:loadRouteSummary(routeName, encountersForRoute)
 						end
 
-							local routeButton = _p.RoundedFrame:new({
-								Name = routeName,
-								["BackgroundColor3"] = ROUTES_CARD_BG,
-								["Size"] = isCompactRoutesLayout and UDim2.fromScale(0.96, 0.11) or UDim2.fromScale(0.9, 0.08),
+						local routeButton = _p.RoundedFrame:new({
+							Name = routeName,
+							["BackgroundColor3"] = ROUTES_CARD_BG,
+							["Size"] = UDim2.fromScale(0.9, 0.08),
 							["ZIndex"] = 7,
 							["Button"] = true,
 							["MouseButton1Click"] = function()
@@ -854,9 +854,9 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 							BackgroundTransparency = 1,
 							Size = UDim2.new(1, -14, 1, 0),
 							Position = UDim2.new(0, 10, 0, 0),
-								Text = tostring(routeName),
-								Font = Enum.Font.GothamBold,
-								TextSize = isCompactRoutesLayout and 18 or 15,
+							Text = tostring(routeName),
+							Font = Enum.Font.GothamBold,
+							TextSize = 15,
 							TextColor3 = ROUTES_TEXT_MAIN,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							TextYAlignment = Enum.TextYAlignment.Center,
