@@ -17,7 +17,8 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 	local ENTRY_TEXT_COLOR = GRID_COLOR
 
 	local background, gui, iconContainer, entryContainer, rightTray, leftTray, topTray, backButton
-	local routesContainerFrame, tabRoutesFrame, routesTitleFrame, routesScrollFrame, routesGridContainer, routesSidebar, routesListContainer, searchBox
+	local routesContainerFrame, tabRoutesFrame, routesTitleFrame, routesScrollFrame, routesGridContainer, routesSidebar, routesListContainer, searchBox, searchHeader
+	local isCompactRoutesLayout = false
 	local squares = Vector2.new(6, 4)
 	local currentPage
 	local zoom = 2
@@ -668,7 +669,7 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 				Parent = routesScrollFrame
 			})
 
-			local searchHeader = _p.RoundedFrame:new({
+			searchHeader = _p.RoundedFrame:new({
 				["Name"] = "SearchFrame",
 				["BackgroundColor3"] = Color3.fromRGB(255, 48, 58),
 				["Position"] = UDim2.fromScale(0, 0),
@@ -745,6 +746,55 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 				ZIndex = 7,
 				Parent = routesListContainer.gui
 			})
+
+			local function applyRoutesLayout()
+				if not routesContainerFrame or not routesContainerFrame.Parent then return end
+				local routeWidth = routesContainerFrame.AbsoluteSize.X
+				local routeHeight = routesContainerFrame.AbsoluteSize.Y
+				if routeWidth <= 0 or routeHeight <= 0 then return end
+
+				local useCompact = routeWidth < 620 or routeWidth / math.max(routeHeight, 1) < 1.05
+				if isCompactRoutesLayout == useCompact then return end
+				isCompactRoutesLayout = useCompact
+
+				if useCompact then
+					routesTitleFrame.Size = UDim2.fromScale(1, 0.11)
+					routesTitleFrame.Position = UDim2.fromScale(0, 0)
+
+					searchHeader.Size = UDim2.fromScale(1, 0.16)
+					searchHeader.Position = UDim2.fromScale(0, 0.12)
+
+					routesListContainer.Size = UDim2.fromScale(1, 0.34)
+					routesListContainer.Position = UDim2.fromScale(0, 0.30)
+
+					routesSidebar.Size = UDim2.fromScale(1, 0.35)
+					routesSidebar.Position = UDim2.fromScale(0, 0.65)
+
+					routesScrollFrame.Position = UDim2.fromScale(0.03, 0.04)
+					routesScrollFrame.Size = UDim2.fromScale(0.94, 0.92)
+
+					routesGridContainer.Position = UDim2.fromScale(0.03, 0.04)
+					routesGridContainer.Size = UDim2.fromScale(0.94, 0.92)
+				else
+					routesTitleFrame.Size = UDim2.fromScale(0.45, 0.15)
+					routesTitleFrame.Position = UDim2.fromScale(0, 0)
+
+					searchHeader.Size = UDim2.fromScale(0.45, 0.19)
+					searchHeader.Position = UDim2.fromScale(0, 0)
+
+					routesListContainer.Size = UDim2.fromScale(0.45, 0.8)
+					routesListContainer.Position = UDim2.fromScale(0, 0.2)
+
+					routesSidebar.Size = UDim2.fromScale(0.5, 1)
+					routesSidebar.Position = UDim2.fromScale(0.5, 0)
+
+					routesScrollFrame.Position = UDim2.fromScale(0.05, 0.05)
+					routesScrollFrame.Size = UDim2.fromScale(0.9, 0.9)
+
+					routesGridContainer.Position = UDim2.fromScale(0.05, 0.05)
+					routesGridContainer.Size = UDim2.fromScale(0.9, 0.9)
+				end
+			end
 
 
 			task.spawn(function()
@@ -835,6 +885,7 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 				iconContainer.Position = UDim2.new(.25/(squares.X+.5), 0, .25/(squares.Y+.5), 0)
 				routesContainerFrame.Size = UDim2.new(squares.X / (squares.X + 0.5), 0, squares.Y / (squares.Y + 0.5), 0)
 				routesContainerFrame.Position = UDim2.new(0.25 / (squares.X + 0.5), 0, 0.25 / (squares.Y + 0.5), 0)
+				applyRoutesLayout()
 				entryContainer.Size = UDim2.new(1.0, -gw*2, 1.0, -gw*2)
 				entryContainer.Position = UDim2.new(0.0, gw, 0.0, gw)
 			end
