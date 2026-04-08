@@ -15,6 +15,13 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 	local GRID_COLOR = color(72, 94, 150)
 	local ENTRY_THEME_COLOR = Color3.new(.7, .8, .9)
 	local ENTRY_TEXT_COLOR = GRID_COLOR
+	local ROUTES_PANEL_BG = Color3.fromRGB(243, 248, 255)
+	local ROUTES_SIDEBAR_BG = Color3.fromRGB(222, 236, 255)
+	local ROUTES_ACCENT = Color3.fromRGB(47, 106, 196)
+	local ROUTES_ACCENT_DARK = Color3.fromRGB(28, 72, 146)
+	local ROUTES_CARD_BG = Color3.fromRGB(255, 255, 255)
+	local ROUTES_TEXT_MAIN = Color3.fromRGB(18, 38, 74)
+	local ROUTES_TEXT_SUB = Color3.fromRGB(75, 94, 127)
 
 	local background, gui, iconContainer, entryContainer, rightTray, leftTray, topTray, backButton
 	local routesContainerFrame, tabRoutesFrame, routesTitleFrame, routesScrollFrame, routesGridContainer, routesSidebar, routesListContainer, searchBox, searchHeader
@@ -621,7 +628,7 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 			}
 
 			routesTitleFrame = _p.RoundedFrame:new({
-				["BackgroundColor3"] = Color3.new(0.9333333333333333, 0.20392156862745098, 0.22745098039215686),
+				["BackgroundColor3"] = ROUTES_ACCENT,
 				["Size"] = UDim2.new(0.45, 0, 0.15, 0),
 				["ZIndex"] = 7,
 				["Parent"] = routesContainerFrame
@@ -638,11 +645,11 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 					["Parent"] = routesTitleFrame.gui
 				}),
 				["Scaled"] = true,
-				["Color"] = innerBorder.BackgroundColor3
+				["Color"] = Color3.fromRGB(240, 247, 255)
 			})
 
 			routesSidebar = _p.RoundedFrame:new({
-				["BackgroundColor3"] = Color3.new(0.8156862745098039, 0.17647058823529413, 0.20784313725490197),
+				["BackgroundColor3"] = ROUTES_SIDEBAR_BG,
 				["Position"] = UDim2.fromScale(0.5, 0),
 				["Size"] = UDim2.fromScale(0.5, 1),
 				["ZIndex"] = 7,
@@ -671,7 +678,7 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 
 			searchHeader = _p.RoundedFrame:new({
 				["Name"] = "SearchFrame",
-				["BackgroundColor3"] = Color3.fromRGB(255, 48, 58),
+				["BackgroundColor3"] = ROUTES_PANEL_BG,
 				["Position"] = UDim2.fromScale(0, 0),
 				["Size"] = UDim2.fromScale(0.45, 0.19),
 				["ZIndex"] = 7,
@@ -686,7 +693,7 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 				Text = "Search",
 				Font = Enum.Font.GothamBlack,
 				TextSize = 18,
-				TextColor3 = Color3.fromRGB(140, 20, 30),
+				TextColor3 = ROUTES_TEXT_MAIN,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
 				ZIndex = 8,
@@ -695,7 +702,7 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 
 			local searchBarShell = _p.RoundedFrame:new({
 				["Name"] = "SearchBoxHolder",
-				["BackgroundColor3"] = Color3.fromRGB(245, 245, 245),
+				["BackgroundColor3"] = ROUTES_CARD_BG,
 				["Position"] = UDim2.fromScale(0.06, 0.52),
 				["Size"] = UDim2.fromScale(0.88, 0.28),
 				["ZIndex"] = 8,
@@ -709,9 +716,9 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 				ClearTextOnFocus = false,
 				Font = Enum.Font.GothamSemibold,
 				PlaceholderText = "Search Pokemon",
-				PlaceholderColor3 = Color3.fromRGB(170, 170, 170),
+				PlaceholderColor3 = Color3.fromRGB(124, 146, 184),
 				Text = "",
-				TextColor3 = Color3.fromRGB(80, 30, 35),
+				TextColor3 = ROUTES_TEXT_MAIN,
 				TextSize = 14,
 				TextScaled = false,
 				TextXAlignment = Enum.TextXAlignment.Left,
@@ -723,7 +730,7 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 			})
 
 			routesListContainer = _p.RoundedFrame:new({
-				["BackgroundColor3"] = Color3.new(0.8156862745098039, 0.17647058823529413, 0.20784313725490197),
+				["BackgroundColor3"] = ROUTES_PANEL_BG,
 				["Position"] = UDim2.fromScale(0, 0.2),
 				["Size"] = UDim2.fromScale(0.45, 0.8),
 				["ZIndex"] = 7,
@@ -811,8 +818,8 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 
 						local routeButton = _p.RoundedFrame:new({
 							Name = routeName,
-							["BackgroundColor3"] = Color3.new(0.9333333333333333, 0.20392156862745098, 0.22745098039215686),
-							["Size"] = UDim2.fromScale(0.9, 0.07),
+							["BackgroundColor3"] = ROUTES_CARD_BG,
+							["Size"] = UDim2.fromScale(0.9, 0.08),
 							["ZIndex"] = 7,
 							["Button"] = true,
 							["MouseButton1Click"] = function()
@@ -823,19 +830,20 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 							["Parent"] = routesScrollFrame
 						})
 
-						local routeLabel = write(tostring(routeName))
-						routeLabel({
-							["Frame"] = create("Frame")({
-								Name = routeName,
-								["AnchorPoint"] = Vector2.new(0.5, 0.5),
-								["BackgroundTransparency"] = 1,
-								["Size"] = UDim2.new(0, 0, 0.5, 0),
-								["Position"] = UDim2.new(0.5, 0, 0.5, 0),
-								["ZIndex"] = 7,
-								["Parent"] = routeButton.gui
-							}),
-							["Scaled"] = true,
-							["Color"] = innerBorder.BackgroundColor3
+						create("TextLabel")({
+							Name = routeName .. "_Label",
+							BackgroundTransparency = 1,
+							Size = UDim2.new(1, -14, 1, 0),
+							Position = UDim2.new(0, 10, 0, 0),
+							Text = tostring(routeName),
+							Font = Enum.Font.GothamBold,
+							TextSize = 15,
+							TextColor3 = ROUTES_TEXT_MAIN,
+							TextXAlignment = Enum.TextXAlignment.Left,
+							TextYAlignment = Enum.TextYAlignment.Center,
+							TextTruncate = Enum.TextTruncate.AtEnd,
+							ZIndex = 8,
+							Parent = routeButton.gui
 						})
 					end
 				end
@@ -1118,7 +1126,7 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 				["Parent"] = routesTitleFrame.gui
 			}),
 			["Scaled"] = true,
-			["Color"] = Color3.new(0.5764705882352941, 0.07450980392156863, 0.13725490196078433)
+			["Color"] = Color3.fromRGB(240, 247, 255)
 		})
 	end
 
@@ -1205,7 +1213,7 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 				local itemText = (result.heldItem ~= "" and result.heldItem ~= "None") and result.heldItem or "No held items"
 				local row = _p.RoundedFrame:new({
 					Name = result.speciesName .. "_" .. result.routeName .. "_SearchEntry",
-					BackgroundColor3 = Color3.fromRGB(236, 92, 112),
+					BackgroundColor3 = ROUTES_CARD_BG,
 					Size = UDim2.new(1, -6, 0, rowHeight),
 					Position = UDim2.new(0, 0, 0, currentY),
 					ZIndex = 8,
@@ -1226,7 +1234,7 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 
 				local iconShell = _p.RoundedFrame:new({
 					Name = "IconShell",
-					BackgroundColor3 = Color3.fromRGB(187, 34, 61),
+					BackgroundColor3 = Color3.fromRGB(229, 236, 249),
 					Size = UDim2.new(0, 38, 0, 38),
 					Position = UDim2.new(0, 8, 0.5, -19),
 					ZIndex = 9,
@@ -1235,7 +1243,7 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 
 				local chanceBadge = _p.RoundedFrame:new({
 					Name = "ChanceBadge",
-					BackgroundColor3 = Color3.fromRGB(154, 17, 43),
+					BackgroundColor3 = ROUTES_ACCENT_DARK,
 					Size = UDim2.new(0, 56, 0, 24),
 					Position = UDim2.new(1, -64, 0.5, -12),
 					ZIndex = 9,
@@ -1253,15 +1261,15 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 				end
 				iconImage.Parent = iconShell.gui
 
-				createText(row.gui, result.speciesName, UDim2.new(1, -130, 0, 22), UDim2.new(0, 54, 0, 6), 15, Color3.fromRGB(255, 248, 249), Enum.Font.GothamBold, Enum.TextXAlignment.Left, 10)
-				createText(row.gui, result.routeName .. " • " .. result.encounterType, UDim2.new(1, -130, 0, 18), UDim2.new(0, 54, 0, 28), 11, Color3.fromRGB(255, 235, 239), Enum.Font.GothamBold, Enum.TextXAlignment.Left, 10)
+				createText(row.gui, result.speciesName, UDim2.new(1, -130, 0, 22), UDim2.new(0, 54, 0, 6), 15, ROUTES_TEXT_MAIN, Enum.Font.GothamBold, Enum.TextXAlignment.Left, 10)
+				createText(row.gui, result.routeName .. " • " .. result.encounterType, UDim2.new(1, -130, 0, 18), UDim2.new(0, 54, 0, 28), 11, ROUTES_TEXT_SUB, Enum.Font.GothamBold, Enum.TextXAlignment.Left, 10)
 				createText(chanceBadge.gui, result.chance, UDim2.new(1, 0, 1, 0), UDim2.new(0, 0, 0, 0), 13, Color3.fromRGB(255, 244, 246), Enum.Font.GothamBlack, Enum.TextXAlignment.Center, 10)
 
 				local subLine = itemText
 				if result.form ~= "" and result.form ~= nil then
 					subLine = tostring(result.form) .. " - " .. subLine
 				end
-				local subLabel = createText(row.gui, subLine, UDim2.new(1, -130, 0, 20), UDim2.new(0, 54, 0, 46), 10, Color3.fromRGB(255, 224, 229), Enum.Font.GothamMedium, Enum.TextXAlignment.Left, 10)
+				local subLabel = createText(row.gui, subLine, UDim2.new(1, -130, 0, 20), UDim2.new(0, 54, 0, 46), 10, ROUTES_TEXT_SUB, Enum.Font.GothamMedium, Enum.TextXAlignment.Left, 10)
 				subLabel.TextWrapped = true
 				subLabel.TextYAlignment = Enum.TextYAlignment.Top
 
@@ -1270,7 +1278,7 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 		end
 
 		if #results == 0 then
-			createText(routesGridContainer, "No Pokémon found", UDim2.new(1, -12, 0, 32), UDim2.new(0, 0, 0, 4), 18, Color3.fromRGB(255, 235, 239), Enum.Font.GothamBold, Enum.TextXAlignment.Center, 10)
+			createText(routesGridContainer, "No Pokémon found", UDim2.new(1, -12, 0, 32), UDim2.new(0, 0, 0, 4), 18, ROUTES_TEXT_SUB, Enum.Font.GothamBold, Enum.TextXAlignment.Center, 10)
 			currentY = 40
 		end
 
@@ -1345,7 +1353,7 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 
 			local section = _p.RoundedFrame:new({
 				Name = tostring(encType) .. "_Section",
-				BackgroundColor3 = Color3.fromRGB(214, 39, 62),
+				BackgroundColor3 = ROUTES_PANEL_BG,
 				Size = UDim2.new(1, -6, 0, sectionHeight),
 				Position = UDim2.new(0, 0, 0, currentY),
 				ZIndex = 7,
@@ -1354,7 +1362,7 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 
 			local header = _p.RoundedFrame:new({
 				Name = tostring(encType) .. "_Header",
-				BackgroundColor3 = Color3.fromRGB(168, 18, 45),
+				BackgroundColor3 = ROUTES_ACCENT,
 				Size = UDim2.new(1, -16, 0, headerHeight),
 				Position = UDim2.new(0, 8, 0, 8),
 				ZIndex = 8,
@@ -1377,7 +1385,7 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 
 					local row = _p.RoundedFrame:new({
 						Name = speciesName .. "_" .. tostring(encType) .. "_Entry",
-						BackgroundColor3 = Color3.fromRGB(236, 92, 112),
+						BackgroundColor3 = ROUTES_CARD_BG,
 						Size = UDim2.new(1, -16, 0, rowHeight),
 						Position = UDim2.new(0, 8, 0, rowY),
 						ZIndex = 8,
@@ -1395,7 +1403,7 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 
 					local iconShell = _p.RoundedFrame:new({
 						Name = "IconShell",
-						BackgroundColor3 = Color3.fromRGB(187, 34, 61),
+						BackgroundColor3 = Color3.fromRGB(229, 236, 249),
 						Size = UDim2.new(0, 38, 0, 38),
 						Position = UDim2.new(0, 8, 0.5, -19),
 						ZIndex = 9,
@@ -1404,7 +1412,7 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 
 					local chanceBadge = _p.RoundedFrame:new({
 						Name = "ChanceBadge",
-						BackgroundColor3 = Color3.fromRGB(154, 17, 43),
+						BackgroundColor3 = ROUTES_ACCENT_DARK,
 						Size = UDim2.new(0, 56, 0, 24),
 						Position = UDim2.new(1, -64, 0.5, -12),
 						ZIndex = 9,
@@ -1422,7 +1430,7 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 					end
 					iconImage.Parent = iconShell.gui
 
-					createText(row.gui, speciesName, UDim2.new(1, -126, 0, 20), UDim2.new(0, 54, 0, 8), 15, Color3.fromRGB(255, 248, 249), Enum.Font.GothamBold, Enum.TextXAlignment.Left, 10)
+					createText(row.gui, speciesName, UDim2.new(1, -126, 0, 20), UDim2.new(0, 54, 0, 8), 15, ROUTES_TEXT_MAIN, Enum.Font.GothamBold, Enum.TextXAlignment.Left, 10)
 					createText(chanceBadge.gui, chance, UDim2.new(1, 0, 1, 0), UDim2.new(0, 0, 0, 0), 13, Color3.fromRGB(255, 244, 246), Enum.Font.GothamBlack, Enum.TextXAlignment.Center, 10)
 
 					local subLine = itemText
@@ -1430,7 +1438,7 @@ return function(_p)--local _p = require(script.Parent.Parent)--game:GetService('
 						subLine = tostring(form) .. " - " .. subLine
 					end
 					do
-						local subLabel = createText(row.gui, subLine, UDim2.new(1, -122, 0, 26), UDim2.new(0, 54, 0, 30), 10, Color3.fromRGB(255, 224, 229), Enum.Font.GothamMedium, Enum.TextXAlignment.Left, 10)
+						local subLabel = createText(row.gui, subLine, UDim2.new(1, -122, 0, 26), UDim2.new(0, 54, 0, 30), 10, ROUTES_TEXT_SUB, Enum.Font.GothamMedium, Enum.TextXAlignment.Left, 10)
 						subLabel.TextWrapped = true
 						subLabel.TextYAlignment = Enum.TextYAlignment.Top
 					end
